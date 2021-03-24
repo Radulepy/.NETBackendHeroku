@@ -57,20 +57,9 @@ namespace RazorDockerTest1
                 endpoints.MapRazorPages();
             });
 
-            app.UseDefaultFiles();
-            UseStaticFilesFromImageFolder(app);
-
+            app.UseDefaultFiles(); 
             app.UseStaticFiles();
         }
-        private static void UseStaticFilesFromImageFolder(IApplicationBuilder app)
-        {
-            string currentDir = Directory.GetCurrentDirectory();
-            string path = Path.Combine(currentDir, "images");
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(path),
-                RequestPath = new PathString("/images")
-            });
-        }
+       
     }
 }

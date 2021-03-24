@@ -38,3 +38,4 @@ C:\.NET Projects\RazorDockerTest1\obj\Debug\net5.0\ref\RazorDockerTest1.dll
 C:\.NET Projects\RazorDockerTest1\obj\Debug\net5.0\RazorDockerTest1.pdb
 C:\.NET Projects\RazorDockerTest1\obj\Debug\net5.0\RazorDockerTest1.genruntimeconfig.cache
 C:\.NET Projects\RazorDockerTest1\obj\Debug\net5.0\RazorDockerTest1.csproj.CopyComplete
+C:\.NET Projects\RazorDockerTest1\bin\Debug\net5.0\RazorDockerTest1.xml
