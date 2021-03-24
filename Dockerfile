@@ -19,4 +19,6 @@ RUN dotnet publish "RazorDockerTest1.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RazorDockerTest1.dll"]
+# Run the app on container startup
+# ENTRYPOINT [ "dotnet", "RazorMvc.dll" ]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet RazorDockerTest1.dll
