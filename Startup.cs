@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
+
 
 namespace RazorDockerTest1
 {
@@ -24,6 +27,8 @@ namespace RazorDockerTest1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +55,21 @@ namespace RazorDockerTest1
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+            });
+
+            app.UseDefaultFiles();
+            UseStaticFilesFromImageFolder(app);
+
+            app.UseStaticFiles();
+        }
+        private static void UseStaticFilesFromImageFolder(IApplicationBuilder app)
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDir, "images");
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(path),
+                RequestPath = new PathString("/images")
             });
         }
     }
