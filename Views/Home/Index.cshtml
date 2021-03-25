@@ -10,35 +10,36 @@
 }
 
 
+<body>
+    <div class="text-left">
+        <h1>Internship Landpage</h1>
+        <p>Here is our classroom</p>
 
-<div class="text-left">
-    <h1>Internship Landpage</h1>
-    <p>Here is our classroom</p>
+        <ul id="list">
 
-    <ul id="list">
+            @for (var i = 0; i < Model.Members.Count; i++)
+            {
+                var member = Model.Members[i];
 
-        @for (var i = 0; i < Model.Members.Count; i++)
-        {
-            var member = Model.Members[i];
+                <li class="member">
+                    <span class="name">@member</span><span class="delete fa fa-pencil"></span><i class="fa fa-remove" onclick="deleteMember(this)"></i>
+                </li>
+            }
+        </ul>
 
-            <li class="member">
-                <span class="name">@member</span><span class="delete fa fa-pencil"></span><i class="fa fa-remove" onclick="deleteMember(@i)"></i>
-            </li>
-        }
-    </ul>
+        <input id="newcomer" title="Name" type="text" />
+        <button id="add" class="btn btn-primary">
+            <i class="fa fa-plus-circle"></i>
+            Add new commer
+        </button>
+        <button id="clear" class="btn btn-secondary">
+            <i class="fa fa-cut"></i>
+            Clear
+        </button>
 
-    <input id="newcomer" title="Name" type="text" />
-    <button id="add" class="btn btn-primary">
-        <i class="fa fa-plus-circle"></i>
-        Add new commer
-    </button>
-    <button id="clear" class="btn btn-secondary">
-        <i class="fa fa-cut"></i>
-        Clear
-    </button>
-
-    <p>
-        <img src="/img/whiteboard.png" width="200" />
-    </p>
-    <script src="/js/site.js" type="text/javascript"></script>
-</div>
+        <p>
+            <img src="/img/whiteboard.png" width="200" />
+        </p>
+        <script src="/js/site.js" type="text/javascript"></script>
+    </div>
+</body>

@@ -17,12 +17,26 @@
         });
     })
 
-    $("#deleteMember").click(function () {
-        console.log('s');
-    })
-
-
     $("#clear").click(function () {
         $("#newcomer").val("");
     })
 });
+
+
+function deleteMember(object) {
+    console.log(id);
+    var id = $(object).parent().index();
+    console.log(id); // take the real time index from the list 
+    $.ajax({
+        url: `/Home/RemoveMember?index=${id}`,
+        type: 'DELETE',
+        success: function (data) {
+            console.log(object);
+            $(object).parent().remove();
+        },
+        error: function (response) {
+            alert(response);
+            console.log(response);
+        },
+    });
+}
