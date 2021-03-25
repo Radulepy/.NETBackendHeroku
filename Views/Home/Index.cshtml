@@ -7,9 +7,15 @@
     <p>Here is our classroom</p>
 
     <ul id="list">
-        <li>Vlad</li>
-        <li>Radu</li>
-        <li>Peter</li>
+
+        @for (var i = 0; i < Model.Members.Count; i++)
+        {
+            var member = Model.Members[i];
+
+            <li class="member">
+                @member
+            </li>
+        }
     </ul>
 
     <input id="newcomer" title="Name" type="text" />
