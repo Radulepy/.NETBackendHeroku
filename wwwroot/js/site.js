@@ -7,7 +7,10 @@
             url: `/Home/AddMember?member=${newcomerName}`,
             success: function (data) {
                 // Remember string interpolation
-                $("#list").append(`<li>${data}</li>`);
+                $("#list").append(`
+                <li class="member">
+                    <span class="name">${data}</span><span class="delete fa fa-pencil"></span><i class="fa fa-remove" onclick="deleteMember(this)"></i>
+                </li>`);
 
                 $("#newcomer").val("");
             },
@@ -24,16 +27,17 @@
 
 
 function deleteMember(object) {
-    console.log(id);
-    var id = $(object).parent().index();
-    console.log(id); // take the real time index from the list 
+
+    var index = $(object).parent().index(); // take the real time index from the list 
+    console.log(index); 
     $.ajax({
-        url: `/Home/RemoveMember?index=${id}`,
+        url: `/Home/RemoveMember?index=${index}`,
         type: 'DELETE',
         success: function (data) {
             console.log(object);
             $(object).parent().remove();
         },
+
         error: function (response) {
             alert(response);
             console.log(response);
