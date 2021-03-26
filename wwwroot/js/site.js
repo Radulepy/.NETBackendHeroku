@@ -9,7 +9,7 @@
                 // Remember string interpolation
                 $("#list").append(`
                 <li class="member">
-                    <span class="name">${data}</span><span class="delete fa fa-pencil"></span><i class="fa fa-remove" onclick="deleteMember(this)"></i>
+                    <span class="name">${data}</span><i class="fa fa-remove" onclick="deleteMember(this)"></i><i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
                 </li>`);
 
                 $("#newcomer").val("");
@@ -23,6 +23,22 @@
     $("#clear").click(function () {
         $("#newcomer").val("");
     })
+
+    $("#list").on("click", ".startEdit", function () {
+        var targetMemberTag = $(this).closest('li');
+        var index = targetMemberTag.index(targetMemberTag.parent());
+        var currentName = targetMemberTag.find(".name").text();
+        $('#editClassmate').attr("memberIndex", index);
+        $('#classmateName').val(currentName);
+    })
+
+    $("#editClassmate").on("click", "#submit", function () {
+        console.log('submit changes to server');
+    })
+
+    $("#editClassmate").on("click", "#cancel", function () {
+        console.log('cancel changes');
+    })
 });
 
 
@@ -35,7 +51,7 @@ function deleteMember(object) {
         type: 'DELETE',
         success: function (data) {
             console.log(object);
-            $(object).parent().remove();
+            $(object).parent().remove(); 
         },
 
         error: function (response) {
