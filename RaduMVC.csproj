@@ -4,4 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="internshipMVC.Tests\**" />
+    <Content Remove="internshipMVC.Tests\**" />
+    <EmbeddedResource Remove="internshipMVC.Tests\**" />
+    <None Remove="internshipMVC.Tests\**" />
+  </ItemGroup>
+
 </Project>
