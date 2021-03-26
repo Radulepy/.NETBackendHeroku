@@ -26,7 +26,7 @@
 
     $("#list").on("click", ".startEdit", function () {
         var targetMemberTag = $(this).closest('li');
-        var index = targetMemberTag.index(targetMemberTag.parent());
+        var index = targetMemberTag.index();
         var currentName = targetMemberTag.find(".name").text();
         $('#editClassmate').attr("memberIndex", index);
         $('#classmateName').val(currentName);
@@ -34,6 +34,26 @@
 
     $("#editClassmate").on("click", "#submit", function () {
         console.log('submit changes to server');
+
+        var newName = $('#classmateName').val();
+        var index = $('#editClassmate').attr("memberIndex");
+        console.log(`/Home/UpdateMember?index=${index}&newName=${newName}`);
+
+
+        //edit name
+        $.ajax({
+            url: `/Home/UpdateMember?index=${index}&newName=${newName}`,
+            type: "PUT",
+            success: function (data) {
+                console.log("succes");
+
+            },
+            error: function (data) {
+                alert(`Failed to edit`);
+            },
+        });
+
+
     })
 
     $("#editClassmate").on("click", "#cancel", function () {
@@ -60,3 +80,5 @@ function deleteMember(object) {
         },
     });
 }
+
+

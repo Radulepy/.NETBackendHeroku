@@ -1,4 +1,5 @@
 ﻿using RaduMVC.Models;
+using System;
 
 namespace RaduMVC.Services
 {
@@ -15,6 +16,11 @@ namespace RaduMVC.Services
         {
             _internshipClass.Members.Add(member);
             return member;
+        }
+
+        public void UpdateMember(int index, string newName)
+        {
+            _internshipClass.Members[index] = newName;
         }
 
         public InternshipClass GetClass()

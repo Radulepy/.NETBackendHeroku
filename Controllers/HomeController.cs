@@ -39,6 +39,12 @@ namespace RaduMVC.Controllers
             return intershipService.AddMember(member);
         }
 
+        [HttpPut]
+        public void UpdateMember(int index, string newName)
+        {
+            intershipService.UpdateMember(index, newName);
+        }
+
 
     }
 }
