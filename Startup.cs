@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using RaduMVC.Services;
 
 namespace RaduMVC
@@ -26,6 +27,10 @@ namespace RaduMVC
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(InternshipService));
+		  services.AddSwaggerGen(c =>
+		            {
+		                c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternshipMVC.WebAPI", Version = "v1" });
+		            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +39,8 @@ namespace RaduMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+				app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "InternshipMVC.WebAPI v1"));
             }
             else
             {
