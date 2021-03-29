@@ -59,6 +59,26 @@
     $("#editClassmate").on("click", "#cancel", function () {
         console.log('cancel changes');
     })
+
+
+    //populare weather fields
+    $.ajax({
+        url: `/WeatherForecast`,
+        type: "GET",
+        success: function (data) {
+            let weather = data[0];
+            let date = new Date(data[0].date).toDateString();
+
+            $("#date").text(date);
+            $("#temperature").text(weather.temperature);
+            $("#summary").text(weather.summary);
+        },
+        error: function (data) {
+            alert(`Failed to populate weather`);
+        },
+    });
+
+
 });
 
 

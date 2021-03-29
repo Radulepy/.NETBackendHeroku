@@ -3,6 +3,7 @@
 }
 @section scripts {
     <script type="text/javascript" src="~/js/site.js"></script>
+    <script type="text/javascript" src="~/js/populateForecast.js"></script>
 }
 @section styles {
     <!-- Read about this here https://fontawesome.com/icons?d=gallery&p=2 -->
@@ -70,6 +71,13 @@
         <p>
             <img src="/img/whiteboard.png" width="200" />
         </p>
+
+        <div class="weather">
+            <p> Date: <div id="date"> 29.03.2021</div> </p>
+            <p> Temp: <div id="temperature"> 15 C </div> </p>
+            <p> Summ: <div id="summary"> Cool</div> </p>
+        </div>
+
         <script src="/js/site.js" type="text/javascript"></script>
     </div>
 </body>

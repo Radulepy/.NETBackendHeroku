@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="internshipMVC.Tests\**" />
+    <Compile Remove="InternshipMVC.WebAPI\**" />
     <Content Remove="internshipMVC.Tests\**" />
+    <Content Remove="InternshipMVC.WebAPI\**" />
     <EmbeddedResource Remove="internshipMVC.Tests\**" />
+    <EmbeddedResource Remove="InternshipMVC.WebAPI\**" />
     <None Remove="internshipMVC.Tests\**" />
+    <None Remove="InternshipMVC.WebAPI\**" />
   </ItemGroup>
 
 </Project>
