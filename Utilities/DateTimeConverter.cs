@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace RaduMVC.Utilities
+{
+    public static class DateTimeConverter
+    {
+        public static DateTime ConvertEpochToDateTime(long ticks)
+        {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(ticks);
+            DateTime dateTime = dateTimeOffset.UtcDateTime;
+            return dateTime;
+        }
+    }
+
+   
+}
