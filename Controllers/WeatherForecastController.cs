@@ -35,17 +35,15 @@ namespace InternshipMVC.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureK = rng.Next(250, 320),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var lat = 45.75;
+            var lon = 25.3333;
+            var apiKey = "16ad7f7f931f63b0e8a7a494f7095d2c";
+            var weatherForecasts = FetchWeatherForecasts(lat, lon, apiKey);
+
+            return weatherForecasts.GetRange(1, 5);
         }
 
-        public IList<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
+        public List<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
         {
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
@@ -55,11 +53,11 @@ namespace InternshipMVC.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecastList(response.Content);
         }
 
-        public static IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
+        public static List<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
         {
             JToken root = JObject.Parse(content);
             JToken testToken = root["daily"];
-            IList<WeatherForecast> forecasts = new List<WeatherForecast>();
+            var forecasts = new List<WeatherForecast>();
             foreach (var token in testToken)
             {
                 var forecast = new WeatherForecast();
