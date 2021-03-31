@@ -64,11 +64,13 @@ namespace InternshipMVC.WebAPI.Controllers
             var forecasts = new List<WeatherForecast>();
             foreach (var token in testToken)
             {
-                var forecast = new WeatherForecast();
-                forecast.Date = DateTimeConverter.ConvertEpochToDateTime(long.Parse(token["dt"].ToString()));
-                forecast.TemperatureK = double.Parse(token["temp"]["day"].ToString());
-                forecast.Summary = token["weather"][0]["description"].ToString();
-                forecasts.Add(forecast);
+                forecasts.Add(new WeatherForecast
+                {
+                    Date = DateTimeConverter.ConvertEpochToDateTime(long.Parse(token["dt"].ToString())),
+                    TemperatureK = double.Parse(token["temp"]["day"].ToString()),
+                    Summary = token["weather"][0]["description"].ToString(),
+                });
+               
             }
 
             return forecasts;

@@ -6,14 +6,7 @@ namespace InternshipMVC.WebAPI
     {
         public DateTime Date { get; set; }
 
-        public int TemperatureC
-        {
-            get
-            {
-                return (int)(TemperatureK - 273.15);
-            }
-
-        }
+        public int TemperatureC => (int)(TemperatureK - 273.15);
 
         public string Summary { get; set; }
 
