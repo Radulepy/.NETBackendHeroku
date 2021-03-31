@@ -55,7 +55,7 @@ namespace InternshipMVC.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecastList(response.Content);
         }
 
-        private IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
+        public static IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
         {
             JToken root = JObject.Parse(content);
             JToken testToken = root["daily"];
