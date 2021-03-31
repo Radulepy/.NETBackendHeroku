@@ -23,4 +23,10 @@
     <ProjectReference Include="..\RaduMVC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <Generator></Generator>
+    </None>
+  </ItemGroup>
+
 </Project>
