@@ -38,18 +38,18 @@ namespace InternshipMVC.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            double latitude =double.Parse(configuration["WeatherForecast:Latitude"]);
-            double logitude = double.Parse(configuration["WeatherForecast:Longitude"]);
-            var apiKey = configuration["WeatherForecast:ApiKey"];
-
-            var weatherForecasts = FetchWeatherForecasts(latitude, logitude, apiKey);
+            var weatherForecasts = FetchWeatherForecasts();
 
             return weatherForecasts.GetRange(1, 5);
         }
 
-        public List<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
+        public List<WeatherForecast> FetchWeatherForecasts()
         {
-            var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
+            double latitude = double.Parse(configuration["WeatherForecast:Latitude"]);
+            double logitude = double.Parse(configuration["WeatherForecast:Longitude"]);
+            var apiKey = configuration["WeatherForecast:ApiKey"];
+
+            var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={logitude}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);

@@ -43,14 +43,11 @@ namespace internshipMVC.Tests
             // Assume
             // https://api.openweathermap.org/data/2.5/onecall?lat=45.75&lon=25.3333&exclude=hourly,minutely&appid=16ad7f7f931f63b0e8a7a494f7095d2c
 
-            var lat = 45.75;
-            var lon = 25.3333;
-            var ApiKey = "16ad7f7f931f63b0e8a7a494f7095d2c";
             Microsoft.Extensions.Logging.ILogger<WeatherForecastController> nullLogger = new NullLogger<WeatherForecastController>();
             var weatherForecastController = new WeatherForecastController(nullLogger, configuration);
 
             //Act
-            var weatherForecasts = weatherForecastController.FetchWeatherForecasts(lat, lon, ApiKey);
+            var weatherForecasts = weatherForecastController.FetchWeatherForecasts();
             WeatherForecast weatherForecastForTomorrow = weatherForecasts[1];
 
 
