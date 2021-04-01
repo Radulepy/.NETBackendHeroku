@@ -78,7 +78,7 @@ namespace internshipMVC.Tests
         public string GetStreamLines()
         {
             var assembly = this.GetType().Assembly;
-            var stream = assembly.GetManifestResourceStream("internshipMVC.Tests.weatherForecast.json");
+            using var stream = assembly.GetManifestResourceStream("internshipMVC.Tests.weatherForecast.json");
             StreamReader streamReader = new StreamReader(stream);
 
             var streamReaderLines = "";
@@ -86,8 +86,6 @@ namespace internshipMVC.Tests
             {
                 streamReaderLines += streamReader.ReadLine();
             }
-
-            streamReader.Close();
 
             return streamReaderLines;
         }
