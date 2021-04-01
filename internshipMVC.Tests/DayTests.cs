@@ -63,18 +63,33 @@ namespace internshipMVC.Tests
         [Fact]
         public void ConvertWeatherJSONToWeatherForecast()
         {
-
+           
             // Assume
-            string content = File.ReadAllText(@"C:\.NET Projects\internshipMVC\internshipMVC.Tests\weatherForecast.json");
-            WeatherForecastController weatherForecastController = instantiateWeatherForecastController();
+            string content = GetStreamLines();
 
             //Act
             var weatherForecasts = WeatherForecastController.ConvertResponseContentToWeatherForecastList(content);
             WeatherForecast weatherForecastForTomorrow = weatherForecasts[1];
 
-
             //Assert
             Assert.Equal(285.39, weatherForecastForTomorrow.TemperatureK);
+        }
+
+        public string GetStreamLines()
+        {
+            var assembly = this.GetType().Assembly;
+            var stream = assembly.GetManifestResourceStream("internshipMVC.Tests.weatherForecast.json");
+            StreamReader streamReader = new StreamReader(stream);
+
+            var streamReaderLines = "";
+            while (!streamReader.EndOfStream)
+            {
+                streamReaderLines += streamReader.ReadLine();
+            }
+
+            streamReader.Close();
+
+            return streamReaderLines;
         }
     }
 }
