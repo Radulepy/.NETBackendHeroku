@@ -1,12 +1,8 @@
 ﻿using RaduMVC.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RaduMVC.Data
 {
-    public class InternDbContext : InternDbContext
+    public class InternDbContext : DbContext
     {
         public InternDbContext(DbContextOptions<InternDbContext> options)
             : base(options)

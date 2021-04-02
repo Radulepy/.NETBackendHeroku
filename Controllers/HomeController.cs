@@ -14,17 +14,30 @@ namespace RaduMVC.Controllers
        
         private readonly ILogger<HomeController> _logger;
         private readonly InternshipService intershipService;
+        private readonly  db;
 
-
-        public HomeController(ILogger<HomeController> logger, InternshipService intershipService)
+        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, InternDbContext db)
         {
             _logger = logger;
             this.intershipService = intershipService;
+            this.db = db;
         }
 
         public IActionResult Index()
         {
             return View(intershipService.GetClass());
+        }
+
+        public IActionResult Privacy()
+        {
+            var interns = db.Interns;
+            return View(interns);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [HttpDelete]
@@ -40,9 +53,9 @@ namespace RaduMVC.Controllers
         }
 
         [HttpPut]
-        public void UpdateMember(int index, string newName)
+        public void UpdateMember(int index, string name)
         {
-            intershipService.UpdateMember(index, newName);
+            intershipService.UpdateMember(index, name);
         }
 
 
