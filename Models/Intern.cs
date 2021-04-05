@@ -12,5 +12,6 @@ namespace RaduMVC.Models
         public string Name { get; set; }
 
         public DateTime RegistrationDateTime { get; set; }
+        public DateTime DateOfJoin { get; internal set; }
     }
 }

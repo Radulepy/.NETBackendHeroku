@@ -1,4 +1,10 @@
-﻿using RaduMVC.Models;
+﻿
+using Microsoft.EntityFrameworkCore;
+using RaduMVC.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RaduMVC.Data
 {
@@ -12,7 +18,7 @@ namespace RaduMVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Intern>().ToTable("Intern");
+            modelBuilder.Entity<Intern>().ToTable("Interns");
         }
     }
 }

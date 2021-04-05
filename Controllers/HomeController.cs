@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RaduMVC.Services;
+using RaduMVC.Data;
+using RaduMVC.Models;
 
 namespace RaduMVC.Controllers
 {
@@ -14,7 +16,7 @@ namespace RaduMVC.Controllers
        
         private readonly ILogger<HomeController> _logger;
         private readonly InternshipService intershipService;
-        private readonly  db;
+        private readonly InternDbContext db;
 
         public HomeController(ILogger<HomeController> logger, InternshipService intershipService, InternDbContext db)
         {
@@ -47,15 +49,20 @@ namespace RaduMVC.Controllers
         }
 
         [HttpGet]
-        public string AddMember(string member)
+        public Intern AddMember(string memberName)
         {
-            return intershipService.AddMember(member);
+            Intern intern = new Intern();
+            intern.Name = memberName;
+            return intershipService.AddMember(intern);
         }
 
         [HttpPut]
-        public void UpdateMember(int index, string name)
+        public void UpdateMember(int id, string memberName)
         {
-            intershipService.UpdateMember(index, name);
+            Intern intern = new Intern();
+            intern.Id = id;
+            intern.Name = memberName;
+            intershipService.UpdateMember(intern.Id, intern.Name);
         }
 
 

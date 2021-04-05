@@ -1,5 +1,6 @@
 ﻿using RaduMVC.Models;
 using System;
+using System.Linq;
 
 namespace RaduMVC.Services
 {
@@ -12,15 +13,16 @@ namespace RaduMVC.Services
             _internshipClass.Members.RemoveAt(index);
         }
 
-        public string AddMember(string member)
+        public Intern AddMember(Intern intern)
         {
-            _internshipClass.Members.Add(member);
-            return member;
+            _internshipClass.Members.Add(intern);
+            return intern;
         }
 
-        public void UpdateMember(int index, string newName)
+        public void UpdateMember(int id, string memberName)
         {
-            _internshipClass.Members[index] = newName;
+            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == id);
+            itemToBeUpdated.Name = memberName;
         }
 
         public InternshipClass GetClass()

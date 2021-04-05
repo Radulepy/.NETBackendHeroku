@@ -8,18 +8,13 @@ namespace RaduMVC.Models
     public class InternshipClass
     {
 
-        private List<string> _members;
+        private List<Intern> _members;
         public InternshipClass()
         {
-            _members = new List<string>
-            {
-                "Borys",
-                "Liova",
-                "Orest",
-            };
+            _members = new List<Intern>();
         }
 
-        public IList<string> Members
+        public IList<Intern> Members
         {
             get { return _members; }
         }
