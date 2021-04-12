@@ -13,16 +13,15 @@ namespace RaduMVC.Controllers
 {
     public class HomeController : Controller
     {
-       
         private readonly ILogger<HomeController> _logger;
         private readonly InternshipService intershipService;
-        private readonly InternDbContext db;
+        private readonly MessageService messageService;
 
-        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, InternDbContext db)
+        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, MessageService messageService)
         {
             _logger = logger;
             this.intershipService = intershipService;
-            this.db = db;
+            this.messageService = messageService;
         }
 
         public IActionResult Index()
@@ -32,13 +31,13 @@ namespace RaduMVC.Controllers
 
         public IActionResult Privacy()
         {
-            var interns = db.Interns;
-            return View(interns);
+            return View(intershipService.GetClass());
         }
 
         public IActionResult Chat()
         {
-            return View();
+
+            return View(messageService.GetAllMessages());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
