@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace RaduMVC.Hubs
 {
-    public class MessageHub : Hub
+    public class MessageHub : Hub, IAddMemberSubscriber
     {
         private readonly MessageService messageService;
+        private IInternshipService internshipService;
 
-        public MessageHub(MessageService messageService)
+        public MessageHub(MessageService messageService, IInternshipService internshipService)
         {
             this.messageService = messageService;
+            this.internshipService = internshipService;
+            internshipService.SubscribeToAddMember(this);
         }
         
         public async Task SendMessage(string user, string message)
