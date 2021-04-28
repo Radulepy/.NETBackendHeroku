@@ -1,0 +1,55 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="out\**" />
+    <Compile Remove="RazorMvc.Tests\**" />
+    <Content Remove="out\**" />
+    <Content Remove="RazorMvc.Tests\**" />
+    <EmbeddedResource Remove="out\**" />
+    <EmbeddedResource Remove="RazorMvc.Tests\**" />
+    <None Remove="*.log" />
+    <None Remove="out\**" />
+    <None Remove="RazorMvc.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\codeRules.png" />
+  </ItemGroup>
+  
+  <ItemGroup>
+  
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+  
+    <PackageReference Include="RestClient" Version="3.446.20952" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+	</ItemGroup>
+
+  <PropertyGroup>
+    <!--
+    Make sure any documentation comments which are included in code get checked for syntax during the build, but do
+    not report warnings for missing comments.
+
+    CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do)
+    CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+  -->
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+  </PropertyGroup>
+</Project>

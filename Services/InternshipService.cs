@@ -1,16 +1,19 @@
-﻿using RaduMVC.Models;
-using System;
-using System.Linq;
+﻿using System.Linq;
+using RazorMvc.Data;
+using RazorMvc.Models;
+using System.Collections.Generic;
+using RazorMvc.Hubs;
 
-namespace RaduMVC.Services
+namespace RazorMvc.Services
 {
-    public class InternshipService
+    public class InternshipService : IInternshipService
     {
         private readonly InternshipClass _internshipClass = new();
 
-        public void RemoveMember(int index)
+        public void RemoveMember(int id)
         {
-            _internshipClass.Members.RemoveAt(index);
+            var itemToBeDeleted = GetMemberById(id);
+            _internshipClass.Members.Remove(itemToBeDeleted);
         }
 
         public Intern AddMember(Intern intern)
@@ -19,15 +22,31 @@ namespace RaduMVC.Services
             return intern;
         }
 
-        public void UpdateMember(int id, string memberName)
+        public IList<Intern> GetMembers()
         {
-            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == id);
-            itemToBeUpdated.Name = memberName;
+            return _internshipClass.Members;
         }
 
-        public InternshipClass GetClass()
+        public void UpdateMember(Intern intern)
         {
-            return _internshipClass;
+            var itemToBeUpdated = GetMemberById(intern.Id)
+;            itemToBeUpdated.Name = intern.Name;
+        }
+
+        public Intern GetMemberById(int id)
+        {
+            var member = _internshipClass.Members.Single(_ => _.Id == id);
+            return member;
+        }
+
+        public void SubscribeToAddMember(IAddMemberSubscriber messageHub)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateLocation(int id, int locationId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

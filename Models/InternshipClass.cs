@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace RaduMVC.Models
+namespace RazorMvc.Models
 {
     public class InternshipClass
     {
+        private readonly List<Intern> _members;
 
-        private List<Intern> _members;
         public InternshipClass()
         {
-            _members = new List<Intern>();
+            _members = new List<Intern>
+            {
+                new Intern { Name = "Collegue1", DateOfJoin = DateTime.Parse("2021-04-01") },
+                new Intern { Name = "Collegue2", DateOfJoin = DateTime.Parse("2021-04-01") },
+                new Intern { Name = "Collegue3", DateOfJoin = DateTime.Parse("2021-03-31") },
+            };
         }
 
         public IList<Intern> Members

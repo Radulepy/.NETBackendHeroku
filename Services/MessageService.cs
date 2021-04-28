@@ -1,13 +1,13 @@
-﻿using RaduMVC.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RazorMvc.Models;
 
-namespace RaduMVC.Services
+namespace RazorMvc.Services
 {
     public class MessageService
-    { 
+    {
         private readonly List<Message> allMessages;
 
         public MessageService()
@@ -22,12 +22,8 @@ namespace RaduMVC.Services
 
         public void AddMessage(string user, string message)
         {
-
-
-            Message messageObject = new Message(user, message);
-            allMessages.Add(messageObject);
+            Message messageObj = new Message(user, message);
+            allMessages.Add(messageObj);
         }
-
-
     }
 }

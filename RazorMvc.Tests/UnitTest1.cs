@@ -1,11 +1,11 @@
-using RaduMVC.Models;
-using RaduMVC.Services;
-using System.Linq;
+using System;
 using Xunit;
+using RazorMvc.Services;
+using RazorMvc.Models;
 
 namespace RazorMvc.Tests
 {
-    public class InternshipServiceTests
+    public class UnitTest1
     {
         [Fact]
         public void InitiallyContainsThreeMembers()
@@ -16,7 +16,7 @@ namespace RazorMvc.Tests
             // Act
 
             // Assert
-            Assert.Equal(4, intershipService.GetClass().Members.Count);
+            Assert.Equal(3, intershipService.GetMembers().Count);
         }
 
         [Fact]
@@ -24,15 +24,15 @@ namespace RazorMvc.Tests
         {
             // Assume
             var intershipService = new InternshipService();
-            var intern = new Intern();
-            intern.Name = "Marko";
 
             // Act
-            intershipService.AddMember(intern);
+            Intern memberToAdd = new Intern();
+            memberToAdd.Name = "Marko";
+            intershipService.AddMember(memberToAdd);
 
             // Assert
-            Assert.Equal(4, intershipService.GetClass().Members.Count);
-            Assert.Contains("Marko", intershipService.GetClass().Members.Select(member => member.Name));
+            Assert.Equal(4, intershipService.GetMembers().Count);
+            Assert.Contains(memberToAdd, intershipService.GetMembers());
         }
     }
 }

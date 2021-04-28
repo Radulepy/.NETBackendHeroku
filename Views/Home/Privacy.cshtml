@@ -1,9 +1,10 @@
-@model IEnumerable<RaduMVC.Models.Intern>
+@model IEnumerable<RazorMvc.Models.Intern>
 
 @{ ViewData["Title"] = "Loading interns from the database"; }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>We respect privacy, GDPR and other stuff very much. Don't worry, be happy!</p>
+
 
 <table class="table">
     <thead>
@@ -33,6 +34,6 @@
                     @Html.DisplayFor(modelItem => item.DateOfJoin)
                 </td>
             </tr>
-        }
+}
     </tbody>
 </table>

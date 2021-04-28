@@ -1,10 +1,10 @@
-{
+﻿{
   "lat": 45.75,
   "lon": 25.3333,
-  "timezone": "Europe / Bucharest",
+  "timezone": "Europe/Bucharest",
   "timezone_offset": 10800,
   "current": {
-    "dt": 1617178089,
+    "dt": 1617178084,
     "sunrise": 1617163233,
     "sunset": 1617209087,
     "temp": 282.8,

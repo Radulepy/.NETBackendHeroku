@@ -1,6 +1,6 @@
 using System;
 
-namespace RaduMVC.Models
+namespace RazorMvc.Models
 {
     public class ErrorViewModel
     {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
-namespace RaduMVC.Models
+namespace RazorMvc.Models
 {
     public class Intern
     {
@@ -11,7 +10,12 @@ namespace RaduMVC.Models
 
         public string Name { get; set; }
 
-        public DateTime RegistrationDateTime { get; set; }
-        public DateTime DateOfJoin { get; internal set; }
+        public DateTime DateOfJoin { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Location Location { get; set; }
+
+        public ICollection<Project> Projects { get; set; }
+
     }
 }

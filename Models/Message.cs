@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RaduMVC.Models
+namespace RazorMvc.Models
 {
     public class Message
     {
@@ -16,6 +16,5 @@ namespace RaduMVC.Models
         public string MessageContent { get; private set; }
 
         public string User { get; private set; }
-
     }
 }

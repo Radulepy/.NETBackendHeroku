@@ -1,42 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using RaduMVC.Services;
-using RaduMVC.Data;
-using RaduMVC.Models;
+using RazorMvc.Data;
+using RazorMvc.Hubs;
+using RazorMvc.Models;
+using RazorMvc.Services;
 
-namespace RaduMVC.Controllers
+namespace RazorMvc.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly InternshipService intershipService;
+        private readonly IInternshipService intershipService;
         private readonly MessageService messageService;
+        private readonly IHubContext<MessageHub> hubContext;
 
-        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, MessageService messageService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, IHubContext<MessageHub> hubContext, MessageService messageService)
         {
             _logger = logger;
             this.intershipService = intershipService;
             this.messageService = messageService;
+            this.hubContext = hubContext;
         }
 
         public IActionResult Index()
         {
-            return View(intershipService.GetClass());
+            return View(intershipService.GetMembers());
         }
 
         public IActionResult Privacy()
         {
-            return View(intershipService.GetClass());
+            return View(intershipService.GetMembers());
         }
 
         public IActionResult Chat()
         {
-
             return View(messageService.GetAllMessages());
         }
 
@@ -49,7 +50,15 @@ namespace RaduMVC.Controllers
         [HttpDelete]
         public void RemoveMember(int index)
         {
-            intershipService.RemoveMember(index);
+            var internsList = intershipService.GetMembers();
+            Intern intern = internsList.FirstOrDefault(intern => intern.Id == index);
+
+            if (intern == null)
+            {
+                return;
+            }
+
+            intershipService.RemoveMember(intern.Id);
         }
 
         [HttpGet]
@@ -57,18 +66,29 @@ namespace RaduMVC.Controllers
         {
             Intern intern = new Intern();
             intern.Name = memberName;
-            return intershipService.AddMember(intern);
-        }
+            intern.DateOfJoin = DateTime.Now;
+
+            var newMember = intershipService.AddMember(intern);
+
+            hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);
+
+            return newMember;
+       }
 
         [HttpPut]
-        public void UpdateMember(int id, string memberName)
+        public void UpdateMember(int index, string name)
         {
-            Intern intern = new Intern();
-            intern.Id = id;
-            intern.Name = memberName;
-            intershipService.UpdateMember(intern.Id, intern.Name);
-        }
+            var internsList = intershipService.GetMembers();
+            Intern intern = internsList.FirstOrDefault(intern => intern.Id == index);
+            if (intern == null)
+            {
+                return;
+            }
 
+            intern.Name = name;
+            intern.DateOfJoin = DateTime.Now;
+            intershipService.UpdateMember(intern);
+        }
 
     }
 }
