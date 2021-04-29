@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using RazorMvc.Models;
 using RazorMvc.Services;
 using System;
@@ -21,6 +22,7 @@ namespace RazorMvc.Controllers
         }
 
         // GET: employee/<EmployeeController>
+        [EnableCors("Policy1")]
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
@@ -28,6 +30,7 @@ namespace RazorMvc.Controllers
         }
 
         // GET employee/<EmployeeController>/5
+       [EnableCors("Policy1")]
         [HttpGet("{id}")]
         public Employee Get(int id)
         {
@@ -35,11 +38,18 @@ namespace RazorMvc.Controllers
         }
 
         // POST employee/<EmployeeController>
+        [EnableCors("Policy1")]
         [HttpPost]
         public void Post([FromBody] Employee employee)
         {
             var newEmployee = employeeService.AddEmployee(employee);
             //hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            employeeService.RemoveEmployee(id);
         }
     }
 }
